@@ -1,0 +1,304 @@
+
+ng-click II
+Workspace ready
+
+html, body {
+ margin: 0;
+ padding: 0;
+ font-family: 'Roboto', sans-serif;
+ width:100%;
+}
+
+.header {
+ padding: 15px;
+}
+
+.header img {
+   display: inline-block;
+}
+
+.header h1 {
+   display: inline-block;
+}
+
+.main {
+ background-color: #f2f2f2 ;
+ padding: 40px 0;
+}
+
+.main h1 {
+ color: #F65A5B ;
+ font-size: 64px;
+ margin: 0 0 80px 0;
+ padding: 20px 0;
+   line-height: 60px;
+   width: 50%;
+}
+
+.main h2 {
+ background-color: #DDDDDD ;
+ color: #999999 ;
+ font-size: 20px;
+ margin: 0 0 40px 0;
+ padding: 20px 0;
+}
+
+.thumbnail {
+ border: 0px;
+ position: relative;
+ padding: 50px;
+   border-radius: 0;
+   margin-bottom:50px;
+}
+
+.thumbnail img {
+   margin-top: 10px;
+ margin-bottom: 30px;
+ max-width: 100%;
+}
+
+.title,
+.date {
+ color: #444;
+ margin: 0;
+ font-size: 18px;
+   font-weight: 800;
+}
+
+.date {
+   color: #a3a3a3 ;
+   font-size: 14px;
+   font-weight: 200;
+}
+
+.price {
+ background-color: #39D1B4 ;
+ color: #fff;
+ font-size: 18px;
+   border-radius: 50%;
+   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+   font-weight: 200;
+   height: 80px;
+   line-height: 80px;
+   text-align: center;
+   width: 80px;
+ position: absolute;
+ top: -40px;
+ right: 20px;
+}
+
+.rating {
+ text-align: right;
+ -webkit-user-select: none;
+    -moz-user-select: none;
+     -ms-user-select: none;
+ margin: 30px 0 -30px 20px;
+}
+
+.likes,
+.dislikes {
+   background: #F65A5B ;
+ color: #fff;
+ cursor: pointer;
+ display: inline-block;
+ font-size: 15px;
+   line-height: 40px;
+   min-width: 40px;
+   height: 40px;
+   border-radius: 50%;
+ margin: 0 -30px 0 40px;
+   text-align: center;
+   font-weight: 200;
+   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+   transition: background 500ms;
+}
+
+.likes:hover,
+.dislikes:hover {
+ color: #F65A5B ;
+   background: rgba(246, 90, 91, 0.25);
+   transition: background 500ms;
+}
+
+.footer {
+ text-align: center;
+ margin: 80px 0 110px;
+}
+
+.footer h2 {
+ font-size: 24px;
+ margin-bottom: 25px;
+}
+
+.footer img {
+   margin: 0 10px;
+}
+
+Open
+
+<!doctype html>
+
+<html>
+
+  <head>
+
+      <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
+
+    <link href="css/main.css" rel="stylesheet" />
+
+​
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+
+  </head>
+
+  <body ng-app="myApp">
+
+    <div class="header">
+
+      <div class="container">
+
+        <h1>Book End</h1>
+
+      </div>
+
+    </div>
+
+​
+
+    <div class="main" ng-controller="MainController">
+
+      <div class="container">
+
+​
+
+        <h1>{{ title }}</h1>
+
+        <h2>{{ promo }}</h2>
+
+​
+
+        <div ng-repeat="product in products" class="col-md-6">
+
+          <div class="thumbnail">
+
+            <img ng-src="{{ product.cover }}">
+
+            <p class="title">{{ product.name | uppercase }}</p>
+
+            <p class="price">{{ product.price | currency }}</p>
+
+            <p class="date">{{ product.pubdate | date }}</p>
+
+            <div class="rating">
+
+              <p class="likes" ng-click="plusOne($index)">+ {{ product.likes }}</p>
+
+              <p class="dislikes" ng-click="minusOne($index)">- {{ product.dislikes }}</p>
+
+            </div>
+
+              
+
+          </div>
+
+        </div>
+
+​
+
+      </div>
+
+    </div>
+
+​
+
+    <div class="footer">
+
+      <div class="container">
+
+        <h2>Available for iPhone and Android.</h2>
+
+        <img src="https://s3.amazonaws.com/codecademy-content/projects/shutterbugg/app-store.png" width="120px" />
+
+        <img src="https://s3.amazonaws.com/codecademy-content/projects/shutterbugg/google-play.png" width="110px" />
+
+      </div>
+
+    </div>
+
+​
+
+​
+
+    <!-- Modules -->
+
+    <script src="js/app.js"></script>
+
+​
+
+    <!-- Controllers -->
+
+Run
+Learn
+
+Great! Each time you click on the number of likes, the number goes up. How does it work?
+
+    The ng-click is a directive. When <p class="likes"> is clicked, ng-click tells AngularJS to run the plusOne() function in the controller.
+    The plusOne() function gets the index of the product that was clicked, and then adds one to that product's likes property.
+
+Notice that the plusOne() doesn't interact with the view at all; it just updates the controller. Any change made to the controller shows up in the view.
+Instructions
+1.
+
+In the controller in the $scope.products array, add a new property named dislikes to each element. Set dislikes to 0.
+2.
+
+In the view under <p class="likes">, add an element for <p class="dislikes">. Then display a product's dislikes using an expression.
+3.
+
+Back in the controller after $scope.products, attach a new property to $scope named minusOne. Set it equal to a function that adds one to a product's dislikes property. Adapt the code from the plusOne() function to do this.
+4.
+
+In the view, use ng-click to trigger the minusOne() function when <p class="dislikes"> is clicked.
+
+View the AngularJS app in the browser. Click on the -0 in each product tile.
+Report a Bug
+If you see a bug, please report it using the form below.
+Submit
+Report a Bug
+
+    Congratulations! You earned a new achievement:
+
+    Lesson Completed: Your First App
+
+Learn AngularJS - Your First App
+
+1
+Hello AngularJS I
+2
+Hello AngularJS II
+3
+Workflow
+4
+Filters I
+5
+Filters II
+6
+ng-repeat I
+7
+ng-repeat II
+8
+Directives
+9
+ng-click I
+10
+ng-click II
+11
+Generalizations
+Back
+
+42%
+Next
+
